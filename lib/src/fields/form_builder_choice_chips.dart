@@ -52,10 +52,10 @@ class FormBuilderChoiceChip<T> extends FormBuilderField<T> {
   /// The default is [Colors.black].
   final Color shadowColor;
 
-  /// The [ShapeBorder] to draw around the chip.
+  /// The [OutlinedBorder] to draw around the chip.
   ///
   /// Defaults to the shape in the ambient [ChipThemeData].
-  final ShapeBorder shape;
+  final OutlinedBorder shape;
 
   /// Configures the minimum size of the tap target.
   ///

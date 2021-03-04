@@ -26,8 +26,8 @@ class _CodePageState extends State<CodePage> {
         elevation: 0,
       ),
       body: WidgetWithCodeView(
-        child: widget.child,
         sourceFilePath: widget.sourceFilePath,
+        child: widget.child,
         // 1codeLinkPrefix` is optional. When it's specified, two more buttons
         // (open-code-in-browser, copy-code-link) will be added in the code view.
         // codeLinkPrefix: 'https://github.com/danvick/flutter_form_builder/blob/version_4/example/',

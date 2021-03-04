@@ -13,19 +13,24 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  date_range_picker: ^1.0.6
+  #date_range_picker: ^1.0.6
   datetime_picker_formfield: ^1.0.0
   dropdown_search: ^0.4.8
   flutter_colorpicker: ^0.3.4
   flutter_chips_input: ^1.9.5
   flutter_datetime_picker: ^1.4.0
-  flutter_touch_spin: ^1.0.1
+  #flutter_touch_spin: ^1.0.1
+
   flutter_typeahead: ^1.9.1
-  intl: ^0.16.1
+  #intl: ^0.17.0
   rating_bar: ^0.2.0
   signature: ^3.2.0
   validators: ^2.0.1
-
+dependency_overrides:
+  intl: "0.17.0"
+  flutter_touch_spin:
+    git:
+      url: https://github.com/allanwei/flutter_touch_spin
 dev_dependencies:
   flutter_test:
     sdk: flutter

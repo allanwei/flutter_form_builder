@@ -408,7 +408,9 @@ class FormBuilderTextField extends FormBuilderField<String> {
               obscureText: obscureText,
               autocorrect: autocorrect,
               enableSuggestions: enableSuggestions,
-              maxLengthEnforced: maxLengthEnforced,
+              maxLengthEnforcement: maxLengthEnforced
+                  ? MaxLengthEnforcement.enforced
+                  : MaxLengthEnforcement.none,
               maxLines: maxLines,
               minLines: minLines,
               expands: expands,

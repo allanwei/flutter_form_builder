@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:core';
 
-import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
+//import 'package:date_range_picker/date_range_picker.dart' as date_range_picker;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -42,9 +42,9 @@ class FormBuilderDateRangePicker extends FormBuilderField<List<DateTime>> {
   final DateTime initialLastDate;
   final DateTime firstDate;
   final DateTime lastDate;
-  final date_range_picker.DatePickerMode initialDatePickerMode;
+  final DatePickerEntryMode initialDatePickerMode;
   final Locale locale;
-  final date_range_picker.SelectableDayPredicate selectableDayPredicate;
+  //final date_range_picker.SelectableDayPredicate selectableDayPredicate;
   final intl.DateFormat format;
 
   /// Creates field for selecting a range of dates
@@ -94,9 +94,9 @@ class FormBuilderDateRangePicker extends FormBuilderField<List<DateTime>> {
     this.showCursor,
     this.initialFirstDate,
     this.initialLastDate,
-    this.initialDatePickerMode = date_range_picker.DatePickerMode.day,
+    this.initialDatePickerMode = DatePickerEntryMode.calendar,
     this.locale,
-    this.selectableDayPredicate,
+    //this.selectableDayPredicate,
   }) : /*TODO: Fix assertion
         assert(
             initialValue == null ||
@@ -152,7 +152,9 @@ class FormBuilderDateRangePicker extends FormBuilderField<List<DateTime>> {
               maxLength: maxLength,
               inputFormatters: inputFormatters,
               keyboardAppearance: keyboardAppearance,
-              maxLengthEnforced: maxLengthEnforced,
+              maxLengthEnforcement: maxLengthEnforced
+                  ? MaxLengthEnforcement.enforced
+                  : MaxLengthEnforcement.none,
               scrollPadding: scrollPadding,
               textAlign: textAlign,
               textCapitalization: textCapitalization,
@@ -214,22 +216,23 @@ class FormBuilderDateRangePickerState
       final initialLastDate = value?.isEmpty ?? true
           ? (widget.initialLastDate ?? initialFirstDate)
           : (value.length < 2 ? initialFirstDate : value[1]);
-      final picked = await date_range_picker.showDatePicker(
+      final picked = await showDateRangePicker(
         context: context,
-        initialFirstDate: initialFirstDate,
-        initialLastDate: initialLastDate,
-        firstDate: widget.firstDate,
-        lastDate: widget.lastDate,
-        initialDatePickerMode: widget.initialDatePickerMode,
+        firstDate: initialFirstDate,
+        lastDate: initialLastDate,
+        initialEntryMode: widget.initialDatePickerMode,
         locale: widget.locale,
         textDirection: widget.textDirection,
-        selectableDayPredicate: widget.selectableDayPredicate,
       );
       if (picked != null) {
-        if (picked.length == 1) {
-          picked.add(picked[0]);
+        var pickeddt = <DateTime>[];
+        if (picked.start == picked.end) {
+          pickeddt.add(picked.start);
+        } else {
+          pickeddt.add(picked.start);
+          pickeddt.add(picked.end);
         }
-        didChange(picked);
+        didChange(pickeddt);
       }
     }
   }

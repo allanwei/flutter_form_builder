@@ -166,7 +166,9 @@ class FormBuilderColorPickerField extends FormBuilderField<Color> {
               inputFormatters: inputFormatters,
               keyboardAppearance: keyboardAppearance,
               maxLength: maxLength,
-              maxLengthEnforced: maxLengthEnforced,
+              maxLengthEnforcement: maxLengthEnforced
+                  ? MaxLengthEnforcement.enforced
+                  : MaxLengthEnforcement.none,
               maxLines: maxLines,
               minLines: minLines,
               onEditingComplete: onEditingComplete,
@@ -225,12 +227,12 @@ class _FormBuilderColorPickerFieldState
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(materialLocalizations.cancelButtonLabel),
                 onPressed: () => Navigator.pop(context, false),
+                child: Text(materialLocalizations.cancelButtonLabel),
               ),
               TextButton(
-                child: Text(materialLocalizations.okButtonLabel),
                 onPressed: () => Navigator.pop(context, true),
+                child: Text(materialLocalizations.okButtonLabel),
               ),
             ],
           );
